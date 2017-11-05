@@ -43,7 +43,7 @@
     </ion-list>
 
     <!-- Cart Total -->
-    <ion-grid>
+    <ion-grid *ngIf="!isEmptyCart">
         <ion-card>
             <ion-grid>
                 <ion-row>
@@ -85,7 +85,7 @@
                             Trở Lại
                         </button>
                     </ion-col>
-                    <ion-col>
+                    <ion-col *ngIf="!isEmptyCart">
                         <button
                             ion-button
                             color="danger"
