@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, Slides, ToastController } from 'ionic-angular';
 import * as WC from 'woocommerce-api';
+import { ProductDetailsPage } from './../product-details/product-details';
 
 @Component({
     selector: 'page-home',
@@ -14,7 +15,7 @@ export class HomePage {
     @ViewChild('productSlides') productSlides: Slides;
     public page: number;
 
-    constructor(public navCtrl: NavController, public toastCtrl : ToastController) {
+    constructor(public navCtrl: NavController, public toastCtrl: ToastController) {
         this.page = 2;
         this.WooCommerce = WC({
             url: 'http://localhost/wordpress/',
@@ -48,20 +49,26 @@ export class HomePage {
 
         this.WooCommerce.getAsync('products?page=' + this.page).then(data => {
             this.moreProducts = this.moreProducts.concat(JSON.parse(data.body).products);
-            if(event != null){
+            if (event != null) {
                 event.complete();
             }
 
-            if(JSON.parse(data.body).products.length < 10){
+            if (JSON.parse(data.body).products.length < 10) {
                 event.enable(false);
                 this.toastCtrl.create({
-                    message : 'Đã tải hết sản phẩm !',
-                    duration : 5000
+                    message: 'Đã tải hết sản phẩm !',
+                    duration: 5000
                 }).present();
             }
 
         }, err => {
             console.log(err);
+        });
+    }
+
+    openProductPage(product) {
+        this.navCtrl.push(ProductDetailsPage, {
+            product
         });
     }
 
