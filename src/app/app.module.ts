@@ -9,6 +9,9 @@ import { HomePage } from '../pages/home/home';
 import { MenuPage } from '../pages/menu/menu';
 import { ProductsByCategoryPage } from '../pages/products-by-category/products-by-category';
 import { ProductDetailsPage } from '../pages/product-details/product-details';
+import { CartPage } from '../pages/cart/cart';
+// Storage
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
     declarations: [
@@ -16,11 +19,13 @@ import { ProductDetailsPage } from '../pages/product-details/product-details';
         HomePage,
         MenuPage,
         ProductsByCategoryPage,
-        ProductDetailsPage
+        ProductDetailsPage,
+        CartPage
     ],
     imports: [
         BrowserModule,
-        IonicModule.forRoot(MyApp)
+        IonicModule.forRoot(MyApp),
+        IonicStorageModule.forRoot()
     ],
     bootstrap: [IonicApp],
     entryComponents: [
@@ -28,7 +33,8 @@ import { ProductDetailsPage } from '../pages/product-details/product-details';
         HomePage,
         MenuPage,
         ProductsByCategoryPage,
-        ProductDetailsPage
+        ProductDetailsPage,
+        CartPage
     ],
     providers: [
         StatusBar,

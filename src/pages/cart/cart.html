@@ -1,0 +1,105 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Giỏ Hàng</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content >
+
+    <!-- Cart Title -->
+    <ion-card>
+        <ion-grid>
+            <ion-row>
+                <ion-col>Thông tin giỏ hàng</ion-col>
+            </ion-row>
+            <ion-row [hidden]="!isEmptyCart">
+                <ion-col>
+                    Chưa có sản phẩm trong giỏ hàng!
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-card>
+    <!-- Cart Title -->
+
+    <ion-list>
+        <ion-item *ngFor="let item of cartItems; let i = index">
+            <ion-thumbnail item-left>
+                <img
+                    [src]="item.product.featured_src"
+                    style="width: 60px !important; height: 60px !important"
+                />
+            </ion-thumbnail>
+            <h2 text-wrap>{{ item.product.title }}</h2>
+            <p>
+                {{ item.qty }} x {{ item.product.price }}
+            </p>
+            <button
+                ion-button clear item-right color="danger"
+                (click)="removeFromCart(item,i)"
+            >
+                <ion-icon name="close-circle"></ion-icon>
+            </button>
+        </ion-item>
+    </ion-list>
+
+    <!-- Cart Total -->
+    <ion-grid>
+        <ion-card>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-2>
+
+                    </ion-col>
+
+                    <ion-col col-4>
+                        <b>Tổng Tiền :</b>
+                    </ion-col>
+
+                    <ion-col col-1>
+
+                    </ion-col>
+
+                    <ion-col col-5 style="text-align: right;">
+                        <b>{{ total | currency :'USD' :true :'1.0-3'}}</b>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card>
+    </ion-grid>
+    <!-- Cart Total -->
+
+    <!-- Cart Footer -->
+
+    <ion-footer>
+        <ion-toolbar>
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        <button
+                            ion-button
+                            color="danger"
+                            outline
+                            block
+                            (click)="closeModal()"
+                        >
+                            Trở Lại
+                        </button>
+                    </ion-col>
+                    <ion-col>
+                        <button
+                            ion-button
+                            color="danger"
+                            block
+                            (click)="checkout()"
+                        >
+                            Thanh Toán
+                        </button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-toolbar>
+    </ion-footer>
+
+    <!-- Cart Footer -->
+
+</ion-content>
